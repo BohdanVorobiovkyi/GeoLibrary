@@ -8,71 +8,66 @@
 
 import UIKit
 import GoogleMaps
-import Photos
 
-class MapViewController: UIViewController {
-    
-    var assets : [AssetInfoModel] = [AssetInfoModel]() {
-        didSet {
-//            print(assets)
-        }
+class MapViewController: UIViewController, PassDataDelegate {
+
+    func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {
+        self.assets = arrayOfAsset
     }
     
-    var allPhotos : PHFetchResult<PHAsset>?  {
-        didSet {
-            guard let allPhotos = allPhotos else { return }
-            for asset in allPhotos.objects(at: IndexSet(0...(self.allPhotos!.count - 1))) {
-                let photo = AssetInfoModel(asset: asset)
-                assets.append(photo)
-                if let lat = photo.latitude, let long = photo.longitude {
-                    showMarkers(lat: lat, long: long)
-                } else {
-                    //photo without coordinates
-                }
-            }
-        }
-    }
-
-
+    private let manager = PhotoManager.shared
+    private var mapView: GMSMapView?
+    private var assets : [AssetInfoModel] = [AssetInfoModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Map"
-        loadPhotos()
+        manager.loadPhotos { (assets) in
+            guard let data = assets else {return}
+            self.assets = data
+            self.showMarkers(asset: data)
+            if let asset = data.first {
+                self.cameraOnMarker(for: asset)
+            }
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        manager.delegate = self
+        manager.loadPhotos()
     }
     
     override func loadView() {
         //GoogleMapsView
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
-
     }
     
-    private func loadPhotos() {
-        PHPhotoLibrary.requestAuthorization { (status) in
-            switch status {
-            case .authorized:
-                print("Good to proceed")
-                let fetchOptions = PHFetchOptions()
-                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                self.allPhotos = PHAsset.fetchAssets(with: .image, options: fetchOptions)
-                
-            case .denied, .restricted:
-                print("Not allowed")
-            case .notDetermined:
-                print("Not determined yet")
-            @unknown default:
-                print("Default")
-            }
-        }
-    }
-    func showMarkers(lat: Double, long: Double) {
-        DispatchQueue.main.async {[weak self] in
-            guard let self = self else {return}
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            marker.map = self.view as! GMSMapView
-        }
-    }
+    private func cameraOnMarker(for asset: AssetInfoModel) {
+           guard let lat = asset.latitude, let long = asset.longitude else {return}
+           DispatchQueue.main.async {[weak self] in
+               guard let self = self else {return}
+               let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 2.0)
+               self.mapView?.camera = camera
+               self.mapView?.animate(to: camera)
+           }
+       }
+       
+       private func showMarkers(asset: Array<AssetInfoModel> ) {
+           for asset in assets {
+               if let lat = asset.latitude, let long = asset.longitude {
+                   DispatchQueue.main.async {[weak self] in
+                       guard let self = self else {return}
+                       let marker = GMSMarker()
+                       marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
+                       marker.map = self.view as! GMSMapView
+                   }
+               } else {
+                   //photo without coordinates
+               }
+           }
+       }
 }

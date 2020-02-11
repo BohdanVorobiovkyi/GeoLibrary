@@ -9,13 +9,17 @@
 import UIKit
 import Photos
 
-class ViewController: UIViewController {
+class TableViewController: UIViewController, PassDataDelegate {
+    
+    func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {
+        self.assets = arrayOfAsset
+    }
     
     @IBOutlet weak var photosDescriptionTable: UITableView!
     
-    let manager = PhotoManager.shared
+    private let manager = PhotoManager.shared
     
-    var assets : [AssetInfoModel] = [AssetInfoModel]() {
+    private var assets : [AssetInfoModel] = [AssetInfoModel]() {
         didSet {
             DispatchQueue.main.async {[weak self] in
                 guard let self = self else {return}
@@ -23,23 +27,24 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Photos Table"
         photosDescriptionTable.dataSource = self
         photosDescriptionTable.delegate = self
+        
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if !manager.assets.isEmpty {
-           assets = manager.assets
-        }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        manager.delegate = self
+        manager.loadPhotos()
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return assets.count

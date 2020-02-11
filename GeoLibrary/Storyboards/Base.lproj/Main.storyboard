@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--List of Photos-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GeoLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="TableViewController" customModule="GeoLibrary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="M4m-wh-M3c"/>
+                    <tabBarItem key="tabBarItem" title="List of Photos" selectedImage="doc" catalog="system" id="M4m-wh-M3c"/>
                     <connections>
                         <outlet property="photosDescriptionTable" destination="Neg-fB-R64" id="dDx-ft-Hrv"/>
                     </connections>
@@ -64,7 +64,7 @@
             </objects>
             <point key="canvasLocation" x="834.78260869565224" y="-155.35714285714286"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="vKo-5v-Kgf">
             <objects>
                 <viewController id="K7U-Av-Iq1" customClass="MapViewController" customModule="GeoLibrary" customModuleProvider="target" sceneMemberID="viewController">
@@ -74,7 +74,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="L12-3v-zmI"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="FXs-u3-Ifa"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="ic_compass_needle.png" id="FXs-u3-Ifa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KGF-UQ-3wN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,4 +99,8 @@
             <point key="canvasLocation" x="-820.28985507246387" y="-155.35714285714286"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="doc" catalog="system" width="56" height="64"/>
+        <image name="ic_compass_needle.png" width="40" height="40"/>
+    </resources>
 </document>

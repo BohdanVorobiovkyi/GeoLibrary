@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1FE1A06140766E4CB5ECDCE /* libPods-GeoLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC51631FD88DB3BF3F2D993 /* libPods-GeoLibrary.a */; };
 		AE21251623F193C60043D217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251523F193C60043D217 /* AppDelegate.swift */; };
 		AE21251823F193C60043D217 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251723F193C60043D217 /* SceneDelegate.swift */; };
-		AE21251A23F193C60043D217 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251923F193C60043D217 /* ViewController.swift */; };
+		AE21251A23F193C60043D217 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251923F193C60043D217 /* TableViewController.swift */; };
 		AE21251D23F193C60043D217 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE21251B23F193C60043D217 /* Main.storyboard */; };
 		AE21251F23F193C80043D217 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE21251E23F193C80043D217 /* Assets.xcassets */; };
 		AE21252223F193C80043D217 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE21252023F193C80043D217 /* LaunchScreen.storyboard */; };
@@ -18,7 +17,8 @@
 		AE21252C23F1A30A0043D217 /* AssetInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21252B23F1A30A0043D217 /* AssetInfoModel.swift */; };
 		AE21253023F1B0B60043D217 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21252F23F1B0B60043D217 /* MapViewController.swift */; };
 		AE21253423F1B45D0043D217 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AE21253323F1B45D0043D217 /* Podfile */; };
-		AE21253A23F1D1800043D217 /* PhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21253923F1D1800043D217 /* PhotosManager.swift */; };
+		AE21253A23F1D1800043D217 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21253923F1D1800043D217 /* PhotoManager.swift */; };
+		AE42C24923F2EE690030E6C9 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE42C24823F2EE690030E6C9 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +28,7 @@
 		AE21251223F193C60043D217 /* GeoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE21251523F193C60043D217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE21251723F193C60043D217 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		AE21251923F193C60043D217 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AE21251923F193C60043D217 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		AE21251C23F193C60043D217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AE21251E23F193C80043D217 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE21252123F193C80043D217 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -37,7 +37,9 @@
 		AE21252B23F1A30A0043D217 /* AssetInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetInfoModel.swift; sourceTree = "<group>"; };
 		AE21252F23F1B0B60043D217 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AE21253323F1B45D0043D217 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AE21253923F1D1800043D217 /* PhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PhotosManager.swift; path = Controllers/PhotosManager.swift; sourceTree = "<group>"; };
+		AE21253923F1D1800043D217 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
+		AE21253C23F1E17E0043D217 /* libPods-GeoLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-GeoLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE42C24823F2EE690030E6C9 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1FE1A06140766E4CB5ECDCE /* libPods-GeoLibrary.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +56,7 @@
 		3DA9DB59E187618DB75B2E98 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE21253C23F1E17E0043D217 /* libPods-GeoLibrary.a */,
 				7EC51631FD88DB3BF3F2D993 /* libPods-GeoLibrary.a */,
 			);
 			name = Frameworks;
@@ -91,9 +93,9 @@
 		AE21251423F193C60043D217 /* GeoLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				AE21253923F1D1800043D217 /* PhotosManager.swift */,
 				AE21251523F193C60043D217 /* AppDelegate.swift */,
 				AE21251723F193C60043D217 /* SceneDelegate.swift */,
+				AE21253B23F1DB130043D217 /* PhotoManager */,
 				AE21253823F1C7F80043D217 /* Models */,
 				AE21253623F1C7D00043D217 /* Controllers */,
 				AE21253523F1C74D0043D217 /* Storyboards */,
@@ -117,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				AE21252F23F1B0B60043D217 /* MapViewController.swift */,
-				AE21251923F193C60043D217 /* ViewController.swift */,
+				AE21251923F193C60043D217 /* TableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,6 +138,15 @@
 				AE21252B23F1A30A0043D217 /* AssetInfoModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		AE21253B23F1DB130043D217 /* PhotoManager */ = {
+			isa = PBXGroup;
+			children = (
+				AE21253923F1D1800043D217 /* PhotoManager.swift */,
+				AE42C24823F2EE690030E6C9 /* Observable.swift */,
+			);
+			path = PhotoManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,13 +265,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE42C24923F2EE690030E6C9 /* Observable.swift in Sources */,
 				AE21252C23F1A30A0043D217 /* AssetInfoModel.swift in Sources */,
 				AE21253023F1B0B60043D217 /* MapViewController.swift in Sources */,
 				AE21252A23F199D70043D217 /* GeoTableCell.swift in Sources */,
-				AE21251A23F193C60043D217 /* ViewController.swift in Sources */,
+				AE21251A23F193C60043D217 /* TableViewController.swift in Sources */,
 				AE21251623F193C60043D217 /* AppDelegate.swift in Sources */,
 				AE21251823F193C60043D217 /* SceneDelegate.swift in Sources */,
-				AE21253A23F1D1800043D217 /* PhotosManager.swift in Sources */,
+				AE21253A23F1D1800043D217 /* PhotoManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

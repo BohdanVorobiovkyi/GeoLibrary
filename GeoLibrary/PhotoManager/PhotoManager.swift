@@ -15,7 +15,7 @@ protocol PassDataDelegate: class {
 
 protocol Observer : class {
 
-    func onValueChanged(_ value: Any?)
+    func onValueChanged(_ value: [AssetInfoModel]?)
 }
 
 protocol PublisherProtocol : class {
@@ -23,7 +23,7 @@ protocol PublisherProtocol : class {
     func addObserver(_ observer: Observer)
     func removeObserver(_ observer: Observer)
 //    func sendData(assets: Any)
-    func notifyObservers(with newValue: Any?)
+    func notifyObservers(with newValue: [AssetInfoModel]?)
 }
 
 class PhotoManager: PublisherProtocol {
@@ -48,19 +48,19 @@ class PhotoManager: PublisherProtocol {
              
          }
          
-      func notifyObservers(with newValue: Any?) {
+      func notifyObservers(with newValue: [AssetInfoModel]?) {
              if let loadedeAssets = newValue {
                 observers.forEach { ($0.onValueChanged(loadedeAssets)) }
              }
          }
    
+    
     func mapFetchResult(_ fetchResult: PHFetchResult<PHAsset>) -> Array<AssetInfoModel> {
         var result = Array<AssetInfoModel>()
         fetchResult.enumerateObjects { (asset, _, _) in
             let assetInfoModel = AssetInfoModel(asset: asset)
             result.append(assetInfoModel)
         }
-        self.notifyObservers(with: result)
         return result
     }
 
@@ -79,8 +79,7 @@ class PhotoManager: PublisherProtocol {
                 if let _completion = completion {
                     _completion(asset)
                 }
-                self?.delegate?.onLoadingCompleted(arrayOfAsset: asset)
-                
+                self?.notifyObservers(with: asset)
             case .denied, .restricted, .notDetermined:
                 print("Default")
                 
@@ -89,6 +88,10 @@ class PhotoManager: PublisherProtocol {
                 }
             }
         }
+    }
+    
+    deinit {
+        observers.removeAll()
     }
     
 }

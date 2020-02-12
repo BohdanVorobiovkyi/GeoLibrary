@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomInfoWindow" customModule="GeoLibrary" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="140"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoViewBackground" translatesAutoresizingMaskIntoConstraints="NO" id="eKX-3M-4Gc">
+                    <rect key="frame" x="0.0" y="40" width="200" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="100" id="c61-bc-OBo"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JlZ-g7-flG">
+                    <rect key="frame" x="8" y="110" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="CustomInfoWindow" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Kr-g6-DQU">
+                    <rect key="frame" x="192" y="110" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" name="TamilSangamMN" family="Tamil Sangam MN" pointSize="11"/>
+                    <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lqs-bt-pXZ">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="90"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="JlZ-g7-flG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="2hJ-8b-HH3"/>
+                <constraint firstItem="eKX-3M-4Gc" firstAttribute="top" secondItem="lqs-bt-pXZ" secondAttribute="bottom" constant="-50" id="7ha-4r-JNY"/>
+                <constraint firstAttribute="trailing" secondItem="eKX-3M-4Gc" secondAttribute="trailing" id="8g7-Jg-6ed"/>
+                <constraint firstItem="1Kr-g6-DQU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="JlZ-g7-flG" secondAttribute="trailing" constant="8" id="Gfg-IE-VnN"/>
+                <constraint firstAttribute="trailing" secondItem="lqs-bt-pXZ" secondAttribute="trailing" id="Keo-Sf-16P"/>
+                <constraint firstAttribute="bottom" secondItem="eKX-3M-4Gc" secondAttribute="bottom" id="ZwB-Tt-o0N"/>
+                <constraint firstAttribute="bottom" secondItem="1Kr-g6-DQU" secondAttribute="bottom" constant="30" id="aGp-t1-Pqk"/>
+                <constraint firstAttribute="bottom" secondItem="JlZ-g7-flG" secondAttribute="bottom" constant="30" id="akH-W3-hj8"/>
+                <constraint firstItem="lqs-bt-pXZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="blo-Of-g2a"/>
+                <constraint firstItem="lqs-bt-pXZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="eZp-Br-Br5"/>
+                <constraint firstAttribute="trailing" secondItem="1Kr-g6-DQU" secondAttribute="trailing" constant="8" id="iSh-4Y-Nim"/>
+                <constraint firstItem="eKX-3M-4Gc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vFy-Vf-cFX"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="dateLabel" destination="1Kr-g6-DQU" id="HvM-eJ-hAo"/>
+                <outlet property="nameLabel" destination="JlZ-g7-flG" id="tJC-L6-LaH"/>
+                <outlet property="photoImageView" destination="lqs-bt-pXZ" id="yLG-Ss-Hbz"/>
+            </connections>
+            <point key="canvasLocation" x="127.53623188405798" y="-28.125"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="infoViewBackground" width="125" height="60"/>
+    </resources>
+</document>

@@ -10,9 +10,11 @@ import UIKit
 import Photos
 
 class TableViewController: UIViewController, Observer {
-   
-    func onValueChanged(_ value: Any?) {
-        self.assets = value as! [AssetInfoModel]
+
+    func onValueChanged(_ value: [AssetInfoModel]?) {
+        if let _value = value {
+            self.assets = _value
+        }
     }
     
     @IBOutlet weak var photosDescriptionTable: UITableView!

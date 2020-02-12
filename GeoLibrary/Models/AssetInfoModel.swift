@@ -10,7 +10,7 @@ import UIKit
 import Photos
 
 struct AssetInfoModel {
-
+    
     let fileName: String?
     let longitude: Double?
     let latitude: Double?
@@ -22,18 +22,29 @@ struct AssetInfoModel {
         self.creationDate = AssetInfoModel.getDate(asset: asset)
         self.longitude = asset.location?.coordinate.longitude
         self.latitude = asset.location?.coordinate.latitude
-        self.image = UIImage()
+        self.image = AssetInfoModel.getAssetThumbnail(asset: asset)
     }
     
-       static func getName(asset: PHAsset) -> String {
-           let assetResources = PHAssetResource.assetResources(for: asset)
-           return assetResources.first!.originalFilename
-       }
-       
-       static func getDate(asset: PHAsset) -> String? {
-            let dateFormatter = DateFormatter()
-           dateFormatter.dateFormat = "dd/MM/yyyy"
+    static func getName(asset: PHAsset) -> String {
+        let assetResources = PHAssetResource.assetResources(for: asset)
+        return assetResources.first!.originalFilename
+    }
+    
+    static func getAssetThumbnail(asset: PHAsset) -> UIImage {
+        let manager = PHImageManager.default()
+        let option = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        option.isSynchronous = true
+        manager.requestImage(for: asset, targetSize: CGSize(width: 100, height: 100), contentMode: .aspectFit, options: option, resultHandler: {(result, info)->Void in
+            thumbnail = result!
+        })
+        return thumbnail
+    }
+    
+    static func getDate(asset: PHAsset) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
         
         return dateFormatter.string(from: asset.creationDate!) 
-       }
+    }
 }

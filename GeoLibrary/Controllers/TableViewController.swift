@@ -9,10 +9,10 @@
 import UIKit
 import Photos
 
-class TableViewController: UIViewController, PassDataDelegate {
-    
-    func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {
-        self.assets = arrayOfAsset
+class TableViewController: UIViewController, Observer {
+   
+    func onValueChanged(_ value: Any?) {
+        self.assets = value as! [AssetInfoModel]
     }
     
     @IBOutlet weak var photosDescriptionTable: UITableView!
@@ -30,17 +30,18 @@ class TableViewController: UIViewController, PassDataDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        manager.addObserver(self)
         self.title = "Photos Table"
         photosDescriptionTable.dataSource = self
         photosDescriptionTable.delegate = self
-        
+        manager.loadPhotos()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        manager.delegate = self
-        manager.loadPhotos()
+//        manager.delegate = self
+
     }
 }
 

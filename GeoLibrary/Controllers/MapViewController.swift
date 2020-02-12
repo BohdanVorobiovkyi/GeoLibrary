@@ -9,7 +9,11 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, PassDataDelegate {
+class MapViewController: UIViewController, Observer, PassDataDelegate {
+    
+    func onValueChanged(_ value: Any?) {
+        print("Notification ----> Value changed \(value)")
+    }
 
     func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {
         self.assets = arrayOfAsset
@@ -22,6 +26,7 @@ class MapViewController: UIViewController, PassDataDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Map"
+        manager.addObserver(self)
         manager.loadPhotos { (assets) in
             guard let data = assets else {return}
             self.assets = data
@@ -36,7 +41,7 @@ class MapViewController: UIViewController, PassDataDelegate {
         super.viewDidAppear(animated)
         
         manager.delegate = self
-        manager.loadPhotos()
+//        manager.loadPhotos()
     }
     
     override func loadView() {

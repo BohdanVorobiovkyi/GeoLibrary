@@ -9,37 +9,58 @@
 import UIKit
 import Photos
 
-protocol ListnerProtocol {
+protocol PassDataDelegate: class {
+    func onLoadingCompleted(arrayOfAsset: [AssetInfoModel])
+}
+
+protocol Observer : class {
 
     func onValueChanged(_ value: Any?)
 }
 
 protocol PublisherProtocol : class {
 
-    func addObserver(_ observer: ListnerProtocol)
-    func removeObserver(_ observer: ListnerProtocol)
-    func sendData(assets: Any)
-    func notifyObservers(_ observers: [ListnerProtocol])
+    func addObserver(_ observer: Observer)
+    func removeObserver(_ observer: Observer)
+//    func sendData(assets: Any)
+    func notifyObservers(with newValue: Any?)
 }
 
-protocol PassDataDelegate: class {
-    func onLoadingCompleted(arrayOfAsset: [AssetInfoModel])
-}
+class PhotoManager: PublisherProtocol {
 
-class PhotoManager {
-    
     static let shared = PhotoManager()
     private var allPhotos : PHFetchResult<PHAsset>?
     weak var delegate: PassDataDelegate?
     private init() {    }
     
+    private lazy var observers = [Observer]()
+         
+         func addObserver(_ observer: Observer) {
+             observers.append(observer)
+             print(#function)
+         }
+         
+         func removeObserver(_ observer: Observer) {
+             if let index = observers.firstIndex(where: { $0 === observer}) {
+                 observers.remove(at: index)
+                 print(#function)
+             }
+             
+         }
+         
+      func notifyObservers(with newValue: Any?) {
+             if let loadedeAssets = newValue {
+                observers.forEach { ($0.onValueChanged(loadedeAssets)) }
+             }
+         }
+   
     func mapFetchResult(_ fetchResult: PHFetchResult<PHAsset>) -> Array<AssetInfoModel> {
         var result = Array<AssetInfoModel>()
         fetchResult.enumerateObjects { (asset, _, _) in
             let assetInfoModel = AssetInfoModel(asset: asset)
             result.append(assetInfoModel)
         }
-        
+        self.notifyObservers(with: result)
         return result
     }
 

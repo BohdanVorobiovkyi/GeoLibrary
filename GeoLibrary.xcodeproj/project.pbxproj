@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0D454423F58A2A00181BA3 /* CageInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D454323F58A2A00181BA3 /* CageInfoModel.swift */; };
+		AE0D454623F593ED00181BA3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0D454523F593ED00181BA3 /* NetworkService.swift */; };
 		AE21251623F193C60043D217 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251523F193C60043D217 /* AppDelegate.swift */; };
 		AE21251823F193C60043D217 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251723F193C60043D217 /* SceneDelegate.swift */; };
 		AE21251A23F193C60043D217 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21251923F193C60043D217 /* TableViewController.swift */; };
@@ -26,6 +28,8 @@
 		10C08FE19E24130FEA484926 /* Pods-GeoLibrary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoLibrary.debug.xcconfig"; path = "Target Support Files/Pods-GeoLibrary/Pods-GeoLibrary.debug.xcconfig"; sourceTree = "<group>"; };
 		35C909759ED6DB2DD4AE10F1 /* Pods-GeoLibrary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GeoLibrary.release.xcconfig"; path = "Target Support Files/Pods-GeoLibrary/Pods-GeoLibrary.release.xcconfig"; sourceTree = "<group>"; };
 		7EC51631FD88DB3BF3F2D993 /* libPods-GeoLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GeoLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE0D454323F58A2A00181BA3 /* CageInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CageInfoModel.swift; sourceTree = "<group>"; };
+		AE0D454523F593ED00181BA3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		AE21251223F193C60043D217 /* GeoLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE21251523F193C60043D217 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE21251723F193C60043D217 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +77,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		AE0D454723F597F000181BA3 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				AE0D454523F593ED00181BA3 /* NetworkService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		AE21250923F193C60043D217 = {
 			isa = PBXGroup;
 			children = (
@@ -98,11 +110,12 @@
 				AE21251523F193C60043D217 /* AppDelegate.swift */,
 				AE21251723F193C60043D217 /* SceneDelegate.swift */,
 				AE21253B23F1DB130043D217 /* PhotoManager */,
-				AEC5AC9A23F4642B006CEB50 /* Views */,
+				AE0D454723F597F000181BA3 /* Networking */,
 				AE21253823F1C7F80043D217 /* Models */,
+				AEC5AC9A23F4642B006CEB50 /* Views */,
 				AE21253623F1C7D00043D217 /* Controllers */,
-				AE21253523F1C74D0043D217 /* Storyboards */,
 				AE21253723F1C7DF0043D217 /* TableViewCells */,
+				AE21253523F1C74D0043D217 /* Storyboards */,
 				AE21251E23F193C80043D217 /* Assets.xcassets */,
 				AE21252323F193C80043D217 /* Info.plist */,
 			);
@@ -139,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				AE21252B23F1A30A0043D217 /* AssetInfoModel.swift */,
+				AE0D454323F58A2A00181BA3 /* CageInfoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -277,8 +291,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0D454623F593ED00181BA3 /* NetworkService.swift in Sources */,
 				AE21252C23F1A30A0043D217 /* AssetInfoModel.swift in Sources */,
 				AE21253023F1B0B60043D217 /* MapViewController.swift in Sources */,
+				AE0D454423F58A2A00181BA3 /* CageInfoModel.swift in Sources */,
 				AE21252A23F199D70043D217 /* GeoTableCell.swift in Sources */,
 				AEC5AC9C23F46508006CEB50 /* CustomInfoWindow.swift in Sources */,
 				AE21251A23F193C60043D217 /* TableViewController.swift in Sources */,

@@ -10,12 +10,6 @@ import UIKit
 import Photos
 
 class TableViewController: UIViewController, Observer {
-
-    func onValueChanged(_ value: [AssetInfoModel]?) {
-        if let _value = value {
-            self.assets = _value
-        }
-    }
     
     @IBOutlet weak var photosDescriptionTable: UITableView!
     
@@ -24,8 +18,17 @@ class TableViewController: UIViewController, Observer {
     private var assets : [AssetInfoModel] = [AssetInfoModel]() {
         didSet {
             DispatchQueue.main.async {[weak self] in
-                guard let self = self else {return}
-                self.photosDescriptionTable.reloadData()
+                self?.photosDescriptionTable.reloadData()
+            }
+        }
+    }
+    
+    var coordinateInfoModel: CageInfoModel = CageInfoModel()  {
+        didSet {
+            let country: String = coordinateInfoModel.results[0].components.country
+            let continent: String = coordinateInfoModel.results[0].components.continent
+            DispatchQueue.main.async {
+                self.showAlert(title: continent, message: country)
             }
         }
     }
@@ -36,14 +39,15 @@ class TableViewController: UIViewController, Observer {
         self.title = "Photos Table"
         photosDescriptionTable.dataSource = self
         photosDescriptionTable.delegate = self
+        photosDescriptionTable.tableFooterView = UIView()
         manager.loadPhotos()
-        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        manager.delegate = self
-
+    // MARK: Observer protocol method
+    func onValueChanged(_ value: [AssetInfoModel]?) {
+        if let _value = value {
+            self.assets = _value
+        }
     }
 }
 
@@ -57,7 +61,40 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         guard  let cell = tableView.dequeueReusableCell(withIdentifier: "geoCell") as? GeoTableCell else { return UITableViewCell() }
         cell.cellLabel.text = "\(assets[indexPath.row].fileName!)  \(assets[indexPath.row].creationDate!)"
         return cell
-        
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let asset = assets[indexPath.row]
+        guard let lat = asset.latitude, let long = asset.longitude else {
+            showAlert(title: "Photo doesn't have coordinates", message: "Try another one")
+            return
+        }
+        
+        NetworkService.reverseGeocoding(latitude: lat as NSNumber, longitude: long as NSNumber) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error.localizedDescription)
+            case .success(let data):
+                self.serializeJson(requestData: data)
+                print("OpenCage data -> ",data)
+            }
+        }
+    }
+        
+    private func serializeJson(requestData: Data) {
+        do {
+            coordinateInfoModel = try JSONDecoder().decode(CageInfoModel.self, from: requestData)
+        } catch let err {
+            print(err.localizedDescription)
+        }
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "OK", style: .destructive, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
 }
 

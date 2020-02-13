@@ -23,15 +23,16 @@ class TableViewController: UIViewController, Observer {
         }
     }
     
-    var coordinateInfoModel: CageInfoModel = CageInfoModel()  {
-        didSet {
-            let country: String = coordinateInfoModel.results[0].components.country
-            let continent: String = coordinateInfoModel.results[0].components.continent
-            DispatchQueue.main.async {
-                self.showAlert(title: continent, message: country)
-            }
-        }
-    }
+//    var coordinateInfoModel: CageInfoModel = CageInfoModel()  {
+//        didSet {
+//            print(coordinateInfoModel)
+//            let country: String = coordinateInfoModel.results[0].components.country!
+//            let continent: String = coordinateInfoModel.results[0].components.continent!
+//            DispatchQueue.main.async {
+//                self.showAlert(title: continent, message: country)
+//            }
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,16 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         
     private func serializeJson(requestData: Data) {
         do {
+            var coordinateInfoModel: CageInfoModel
+            
             coordinateInfoModel = try JSONDecoder().decode(CageInfoModel.self, from: requestData)
+            
+            let country: String = coordinateInfoModel.results[0].components.country!
+            let continent: String = coordinateInfoModel.results[0].components.continent!
+            DispatchQueue.main.async {
+                print(coordinateInfoModel)
+                self.showAlert(title: continent, message: country)
+            }
         } catch let err {
             print(err.localizedDescription)
         }

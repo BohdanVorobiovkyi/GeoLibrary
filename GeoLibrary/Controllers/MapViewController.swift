@@ -12,7 +12,7 @@ import GoogleMaps
 class MapViewController: UIViewController, Observer, GMSMapViewDelegate {
     
     func onValueChanged(_ value: [AssetInfoModel]?) {
-        print("Notification ----> Value changed \(value)")
+        print("Notification ----> Value changed")
     }
 
     func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {

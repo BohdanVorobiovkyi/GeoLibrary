@@ -30,7 +30,7 @@ class PhotoManager: PublisherProtocol {
 
     static let shared = PhotoManager()
     private var allPhotos : PHFetchResult<PHAsset>?
-    weak var delegate: PassDataDelegate?
+    
     private init() {    }
     
     private lazy var observers = [Observer]()
@@ -58,7 +58,7 @@ class PhotoManager: PublisherProtocol {
     func mapFetchResult(_ fetchResult: PHFetchResult<PHAsset>) -> Array<AssetInfoModel> {
         var result = Array<AssetInfoModel>()
         fetchResult.enumerateObjects { (asset, _, _) in
-            let assetInfoModel = AssetInfoModel(asset: asset)
+            let assetInfoModel = AssetInfoModel(asset: asset) 
             result.append(assetInfoModel)
         }
         return result

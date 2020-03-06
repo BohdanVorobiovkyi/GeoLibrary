@@ -35,7 +35,7 @@ class NetworkService {
         let urlString = String(format: "%@%@&language=en&pretty=1&q=%@", baseURL(), escapeCharacters(apiKey), escapeCharacters(latLongString))
         
         guard let url = URL(string: urlString) else {return}
-        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
         request.httpMethod = "GET"
         let sessionConfiguration = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfiguration)

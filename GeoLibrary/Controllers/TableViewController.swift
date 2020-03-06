@@ -84,9 +84,9 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         
     private func serializeJson(requestData: Data) {
         do {
-            var coordinateInfoModel: CageInfoModel
+//            var coordinateInfoModel:  InfoModel
             
-            coordinateInfoModel = try JSONDecoder().decode(CageInfoModel.self, from: requestData)
+            let coordinateInfoModel: CageInfoModel = try JSONDecoder().decode(CageInfoModel.self, from: requestData)
             
             let country: String = coordinateInfoModel.results[0].components.country!
             let continent: String = coordinateInfoModel.results[0].components.continent!

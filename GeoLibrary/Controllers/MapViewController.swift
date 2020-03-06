@@ -9,7 +9,7 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, Observer, GMSMapViewDelegate {
+class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
     
     func onValueChanged(_ value: [AssetInfoModel]?) {
         print("Notification ----> Value changed")

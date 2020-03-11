@@ -9,38 +9,35 @@
 import UIKit
 import GoogleMaps
 
-class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate {
     
-    func onValueChanged(_ value: [AssetInfoModel]?) {
-        print("Notification ----> Value changed")
-    }
-
-    func onLoadingCompleted(arrayOfAsset : [AssetInfoModel]) {
-        self.assets = arrayOfAsset
-    }
+    let dataSource = GenericDataSource<AssetInfoModel>()
     
     private let manager = PhotoManager.shared
     private var mapView: GMSMapView?
-    private var assets : [AssetInfoModel] = [AssetInfoModel]()
+    
+    lazy var viewModel: AssetsViewModel = {
+        let viewModel = AssetsViewModel(photoManager: manager, dataSource: dataSource)
+        return viewModel
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Map"
-        manager.addObserver(self)
-        manager.loadPhotos { (assets) in
-            guard let data = assets else {return}
-            self.assets = data
-            self.showMarkers(asset: data)
-            if let asset = data.first {
-                self.cameraOnMarker(for: asset)
+        
+        dataSource.data.addAndNotify(observer: self) {
+            self.showMarkers(assets: self.dataSource.data.value)
+            if let firstAsset = self.dataSource.data.value.first {
+                self.cameraOnMarker(for: firstAsset)
             }
         }
+        self.viewModel.fetchPhotos()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        manager.loadPhotos()
+        
     }
     
     override func loadView() {
@@ -54,7 +51,6 @@ class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print(marker.accessibilityLabel)
-        
         mapView.selectedMarker = marker
         return true
     }
@@ -62,7 +58,7 @@ class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
         if mapView.selectedMarker != nil
         {
-          mapView.selectedMarker = nil
+            mapView.selectedMarker = nil
         }
     }
     
@@ -71,9 +67,9 @@ class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
         print(index)
         let customInfoWindow = Bundle.main.loadNibNamed("CustomInfoWindow", owner: self, options: nil)![0] as! CustomInfoWindow
         DispatchQueue.main.async { [weak self] in
-            customInfoWindow.photoImageView.image = self?.assets[index].image
-            customInfoWindow.nameLabel.text = self?.assets[index].fileName
-            customInfoWindow.dateLabel.text = self?.assets[index].creationDate
+            customInfoWindow.photoImageView.image = self?.dataSource.data.value[index].image
+            customInfoWindow.nameLabel.text = self?.dataSource.data.value[index].fileName
+            customInfoWindow.dateLabel.text = self?.dataSource.data.value[index].creationDate
             customInfoWindow.reloadInputViews()
         }
         
@@ -81,35 +77,35 @@ class MapViewController: UIViewController, Observer,  GMSMapViewDelegate {
     }
     
     private func cameraOnMarker(for asset: AssetInfoModel) {
-           guard let lat = asset.latitude, let long = asset.longitude else {return}
-           DispatchQueue.main.async {[weak self] in
-               guard let self = self else {return}
-               let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 2.0)
-               self.mapView?.camera = camera
-               self.mapView?.animate(to: camera)
-           }
-       }
-       
-       private func showMarkers(asset: Array<AssetInfoModel> ) {
+        guard let lat = asset.latitude, let long = asset.longitude else {return}
+        DispatchQueue.main.async {[weak self] in
+            guard let self = self else {return}
+            let camera = GMSCameraPosition.camera(withLatitude: lat, longitude: long, zoom: 2.0)
+            self.mapView?.camera = camera
+            self.mapView?.animate(to: camera)
+        }
+    }
+    
+    private func showMarkers(assets: [AssetInfoModel] ) {
         var accessibilityIndex = 0
-           for asset in assets {
-               if let lat = asset.latitude, let long = asset.longitude {
-                   DispatchQueue.main.async {[weak self] in
-                       guard let self = self else {return}
-                       let marker = GMSMarker()
-//                       marker.icon = asset.image
-                       marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//                    marker.icon = asset.image
+        print(assets)
+        for asset in assets {
+            if let lat = asset.latitude, let long = asset.longitude {
+                DispatchQueue.main.async {[weak self] in
+                    guard let self = self else {return}
+                    let marker = GMSMarker()
+                    marker.position = CLLocationCoordinate2D(latitude: lat, longitude: long)
                     marker.snippet = "aaaaa"
                     marker.infoWindowAnchor = CGPoint(x: 0.5, y: 0.5)
                     marker.accessibilityLabel = "\(accessibilityIndex)"
-                       marker.map = self.view as! GMSMapView
+                    marker.map = self.view as? GMSMapView
                     accessibilityIndex += 1
                     print(accessibilityIndex)
-                   }
-               } else {
-                   //photo without coordinates
-               }
-           }
-       }
+                }
+            } else {
+                //photo without coordinates
+                print("\(asset.fileName) withot coordinates")
+            }
+        }
+    }
 }

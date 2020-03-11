@@ -20,6 +20,11 @@
 		AE21253023F1B0B60043D217 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21252F23F1B0B60043D217 /* MapViewController.swift */; };
 		AE21253423F1B45D0043D217 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = AE21253323F1B45D0043D217 /* Podfile */; };
 		AE21253A23F1D1800043D217 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE21253923F1D1800043D217 /* PhotoManager.swift */; };
+		AE69ABA92417E659006C87EB /* AssetsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE69ABA82417E659006C87EB /* AssetsViewModel.swift */; };
+		AE69ABAB2417EB6C006C87EB /* ObservableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE69ABAA2417EB6C006C87EB /* ObservableValue.swift */; };
+		AE69ABAD2417EDDF006C87EB /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE69ABAC2417EDDF006C87EB /* Observer.swift */; };
+		AE69ABAF2417EDE6006C87EB /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE69ABAE2417EDE6006C87EB /* Observable.swift */; };
+		AE69ABB12418DC25006C87EB /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE69ABB02418DC25006C87EB /* GenericDataSource.swift */; };
 		AEC5AC9C23F46508006CEB50 /* CustomInfoWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC5AC9B23F4642B006CEB50 /* CustomInfoWindow.swift */; };
 		AEC5AC9F23F4681D006CEB50 /* CustomInfoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEC5AC9D23F466C6006CEB50 /* CustomInfoWindow.xib */; };
 /* End PBXBuildFile section */
@@ -44,6 +49,11 @@
 		AE21253323F1B45D0043D217 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		AE21253923F1D1800043D217 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		AE21253C23F1E17E0043D217 /* libPods-GeoLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-GeoLibrary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE69ABA82417E659006C87EB /* AssetsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsViewModel.swift; sourceTree = "<group>"; };
+		AE69ABAA2417EB6C006C87EB /* ObservableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableValue.swift; sourceTree = "<group>"; };
+		AE69ABAC2417EDDF006C87EB /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		AE69ABAE2417EDE6006C87EB /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		AE69ABB02418DC25006C87EB /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericDataSource.swift; sourceTree = "<group>"; };
 		AEC5AC9B23F4642B006CEB50 /* CustomInfoWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInfoWindow.swift; sourceTree = "<group>"; };
 		AEC5AC9D23F466C6006CEB50 /* CustomInfoWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomInfoWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +121,8 @@
 				AE21251723F193C60043D217 /* SceneDelegate.swift */,
 				AE21253B23F1DB130043D217 /* PhotoManager */,
 				AE0D454723F597F000181BA3 /* Networking */,
+				AE69ABB32418E50D006C87EB /* Observer Classes */,
+				AE69ABB22418E4C5006C87EB /* ViewModels */,
 				AE21253823F1C7F80043D217 /* Models */,
 				AEC5AC9A23F4642B006CEB50 /* Views */,
 				AE21253623F1C7D00043D217 /* Controllers */,
@@ -163,6 +175,25 @@
 				AE21253923F1D1800043D217 /* PhotoManager.swift */,
 			);
 			path = PhotoManager;
+			sourceTree = "<group>";
+		};
+		AE69ABB22418E4C5006C87EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AE69ABA82417E659006C87EB /* AssetsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AE69ABB32418E50D006C87EB /* Observer Classes */ = {
+			isa = PBXGroup;
+			children = (
+				AE69ABAA2417EB6C006C87EB /* ObservableValue.swift */,
+				AE69ABAC2417EDDF006C87EB /* Observer.swift */,
+				AE69ABAE2417EDE6006C87EB /* Observable.swift */,
+				AE69ABB02418DC25006C87EB /* GenericDataSource.swift */,
+			);
+			path = "Observer Classes";
 			sourceTree = "<group>";
 		};
 		AEC5AC9A23F4642B006CEB50 /* Views */ = {
@@ -291,13 +322,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE69ABAD2417EDDF006C87EB /* Observer.swift in Sources */,
 				AE0D454623F593ED00181BA3 /* NetworkService.swift in Sources */,
 				AE21252C23F1A30A0043D217 /* AssetInfoModel.swift in Sources */,
+				AE69ABAB2417EB6C006C87EB /* ObservableValue.swift in Sources */,
 				AE21253023F1B0B60043D217 /* MapViewController.swift in Sources */,
+				AE69ABB12418DC25006C87EB /* GenericDataSource.swift in Sources */,
 				AE0D454423F58A2A00181BA3 /* CageInfoModel.swift in Sources */,
 				AE21252A23F199D70043D217 /* GeoTableCell.swift in Sources */,
+				AE69ABA92417E659006C87EB /* AssetsViewModel.swift in Sources */,
 				AEC5AC9C23F46508006CEB50 /* CustomInfoWindow.swift in Sources */,
 				AE21251A23F193C60043D217 /* TableViewController.swift in Sources */,
+				AE69ABAF2417EDE6006C87EB /* Observable.swift in Sources */,
 				AE21251623F193C60043D217 /* AppDelegate.swift in Sources */,
 				AE21251823F193C60043D217 /* SceneDelegate.swift in Sources */,
 				AE21253A23F1D1800043D217 /* PhotoManager.swift in Sources */,

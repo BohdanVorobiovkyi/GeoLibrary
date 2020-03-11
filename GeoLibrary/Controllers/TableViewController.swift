@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class TableViewController: UIViewController, Observer {
+class TableViewController: UIViewController {
     
     @IBOutlet weak var photosDescriptionTable: UITableView!
     
@@ -36,7 +36,7 @@ class TableViewController: UIViewController, Observer {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        manager.addObserver(self)
+//        manager.addObserver(self)
         self.title = "Photos Table"
         photosDescriptionTable.dataSource = self
         photosDescriptionTable.delegate = self
